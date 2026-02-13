@@ -1,7 +1,7 @@
 # DM-PrintDex — Galeria Pokémon 3D
 # Site estático Hugo para vitrine de Pokémon impressos em 3D e pintados à mão.
 
-baseURL = "https://username.github.io/DM-PrintDex/"
+baseURL = "https://danielmoraiswave.github.io/DM-PrintDex/"
 languageCode = "pt-pt"
 title = "DM-PrintDex — Pokémon 3D"
 theme = ""

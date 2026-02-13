@@ -17,7 +17,7 @@
       <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}">
         <div class="pokemon-card__media">
           {{ if $hasImage }}
-            <img src="{{ .Site.BaseURL }}{{ $imgPath }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy">
+            <img src="{{ .Site.BaseURL }}/DM-PrintDex/{{ $imgPath }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy">
             <span class="badge badge--done">Já feito</span>
           {{ else }}
             <div class="pokemon-card__placeholder" aria-hidden="true">
@@ -39,4 +39,5 @@
   {{ .Content }}
 </div>
 {{ end }}
+
 

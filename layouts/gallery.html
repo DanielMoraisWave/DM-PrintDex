@@ -10,7 +10,8 @@
   <div class="pokemon-grid">
     {{ $whatsapp := .Site.Params.whatsapp_number }}
     {{ range site.Data.pokemon }}
-      {{ $imgPath := printf "pokemon/%03d/1.jpg" .id }}
+      {{ $id := int .id }}
+      {{ $imgPath := printf "pokemon/%03d/1.jpg" $id }}
       {{ $staticPath := path.Join "static" $imgPath }}
       {{ $hasImage := fileExists $staticPath }}
 
@@ -29,7 +30,7 @@
         </div>
         <div class="pokemon-card__body">
           <h2 class="pokemon-card__title">{{ .name }}</h2>
-          <p class="pokemon-card__id">#{{ printf "%03d" .id }}</p>
+          <p class="pokemon-card__id">#{{ printf "%03d" $id }}</p>
           <a href="https://wa.me/{{ $whatsapp }}?text=Olá! Vi o Pokémon {{ .name }} no teu site 🙂" class="btn btn-whatsapp" target="_blank" rel="noopener">Contactar no WhatsApp</a>
         </div>
       </article>

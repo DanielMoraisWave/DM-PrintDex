@@ -18,3 +18,5 @@ disableKinds = ["taxonomy", "term", "RSS"]
 [outputs]
 home = ["HTML"]
 page = ["HTML"]
+
+# Deploy: GitHub Actions publica em Pages em cada push.

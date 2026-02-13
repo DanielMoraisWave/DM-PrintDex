@@ -1,0 +1,286 @@
+/* DM-PrintDex — Estilos base
+   Mobile-first, grid de cards, placeholders e botão WhatsApp */
+
+:root {
+  --color-bg: #0f1419;
+  --color-surface: #1a2332;
+  --color-text: #e6edf3;
+  --color-muted: #8b949e;
+  --color-accent: #25d366;
+  --color-accent-hover: #20bd5a;
+  --color-placeholder: #21262d;
+  --color-badge-done: #238636;
+  --color-badge-soon: #8957e5;
+  --radius: 12px;
+  --shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --font-sans: "Segoe UI", system-ui, -apple-system, sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-sans);
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.site-header {
+  background: var(--color-surface);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 0.75rem 0;
+}
+
+.site-header .container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.logo {
+  font-weight: 700;
+  font-size: 1.25rem;
+  color: var(--color-text);
+  text-decoration: none;
+}
+
+.logo:hover {
+  text-decoration: underline;
+}
+
+.nav-links {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 1rem;
+}
+
+.nav-links a {
+  color: var(--color-muted);
+  text-decoration: none;
+}
+
+.nav-links a:hover {
+  color: var(--color-text);
+}
+
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.site-main {
+  flex: 1;
+  padding: 2rem 0;
+}
+
+.site-footer {
+  background: var(--color-surface);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: 1rem 0;
+  font-size: 0.875rem;
+  color: var(--color-muted);
+}
+
+/* Hero (página inicial) */
+.hero {
+  text-align: center;
+  padding: 3rem 0;
+}
+
+.hero h1 {
+  margin: 0 0 0.5rem;
+  font-size: clamp(1.75rem, 4vw, 2.5rem);
+}
+
+.hero .lead {
+  margin: 0 0 1.5rem;
+  color: var(--color-muted);
+  font-size: 1.125rem;
+}
+
+.btn {
+  display: inline-block;
+  padding: 0.6rem 1.25rem;
+  border-radius: var(--radius);
+  font-weight: 600;
+  text-decoration: none;
+  transition: background 0.2s, color 0.2s;
+}
+
+.btn-primary {
+  background: var(--color-accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--color-accent-hover);
+  color: #fff;
+}
+
+.btn-whatsapp {
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.9rem;
+  width: 100%;
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.btn-whatsapp:hover {
+  background: var(--color-accent-hover);
+  color: #fff;
+}
+
+.intro {
+  max-width: 42rem;
+  color: var(--color-muted);
+}
+
+/* Page (Sobre, etc.) */
+.page-header {
+  margin-bottom: 1.5rem;
+}
+
+.page-header h1 {
+  margin: 0 0 0.25rem;
+  font-size: clamp(1.5rem, 3vw, 2rem);
+}
+
+.page-header .lead {
+  margin: 0;
+  color: var(--color-muted);
+}
+
+.page-content {
+  max-width: 65ch;
+}
+
+/* Grid da galeria — mobile-first */
+.pokemon-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.pokemon-card {
+  background: var(--color-surface);
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s;
+}
+
+.pokemon-card:hover {
+  transform: translateY(-2px);
+}
+
+.pokemon-card__media {
+  position: relative;
+  aspect-ratio: 1;
+  background: var(--color-placeholder);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pokemon-card__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.pokemon-card__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1rem;
+  width: 100%;
+  height: 100%;
+}
+
+.pokemon-card__silhouette {
+  width: 80px;
+  height: 80px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.pokemon-card__name-placeholder {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--color-muted);
+  text-align: center;
+  word-break: break-word;
+}
+
+.pokemon-card--placeholder .pokemon-card__media {
+  background: linear-gradient(180deg, var(--color-placeholder) 0%, rgba(33, 38, 45, 0.8) 100%);
+}
+
+.pokemon-card__body {
+  padding: 1rem;
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+
+.pokemon-card__title {
+  margin: 0;
+  font-size: 1.125rem;
+  font-weight: 600;
+}
+
+.pokemon-card__id {
+  margin: 0.25rem 0 0;
+  font-size: 0.8rem;
+  color: var(--color-muted);
+}
+
+/* Badges */
+.badge {
+  position: absolute;
+  top: 0.5rem;
+  right: 0.5rem;
+  padding: 0.25rem 0.5rem;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.badge--done {
+  background: var(--color-badge-done);
+  color: #fff;
+}
+
+.badge--soon {
+  background: var(--color-badge-soon);
+  color: #fff;
+}
+
+@media (min-width: 640px) {
+  .pokemon-grid {
+    gap: 1.5rem;
+  }
+}

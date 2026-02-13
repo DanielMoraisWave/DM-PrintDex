@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="{{ .Site.Language.Lang }}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ block "title" . }}{{ .Title }} | {{ .Site.Title }}{{ end }}</title>
+  <meta name="description" content="{{ default .Site.Params.description .Description }}">
+  <link rel="stylesheet" href="{{ (resources.Get "css/style.css" | minify | fingerprint).Permalink }}">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="container">
+      <a href="{{ "/" | relURL }}" class="logo">{{ .Site.Title }}</a>
+      <ul class="nav-links">
+        <li><a href="{{ "/" | relURL }}">Início</a></li>
+        <li><a href="{{ "/gallery/" | relURL }}">Galeria</a></li>
+        <li><a href="{{ "/sobre/" | relURL }}">Sobre</a></li>
+      </ul>
+    </nav>
+  </header>
+  <main class="site-main">
+    {{ block "main" . }}{{ end }}
+  </main>
+  <footer class="site-footer">
+    <div class="container">
+      <p>DM-PrintDex — Pokémon 3D. Contacto via WhatsApp.</p>
+    </div>
+  </footer>
+</body>
+</html>

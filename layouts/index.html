@@ -1,0 +1,14 @@
+{{ define "title" }}{{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<div class="hero">
+  <div class="container">
+    <h1>{{ .Title }}</h1>
+    <p class="lead">{{ .Param "description" | default .Summary }}</p>
+    <a href="{{ "/gallery/" | relURL }}" class="btn btn-primary">Ver galeria</a>
+  </div>
+</div>
+<section class="container intro">
+  {{ .Content }}
+</section>
+{{ end }}

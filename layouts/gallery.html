@@ -1,0 +1,41 @@
+{{ define "title" }}{{ .Title }} | {{ .Site.Title }}{{ end }}
+
+{{ define "main" }}
+<div class="container">
+  <header class="page-header">
+    <h1>{{ .Title }}</h1>
+    <p class="lead">{{ .Param "description" | default .Summary }}</p>
+  </header>
+
+  <div class="pokemon-grid">
+    {{ $whatsapp := .Site.Params.whatsapp_number }}
+    {{ range site.Data.pokemon }}
+      {{ $imgPath := printf "pokemon/%03d/1.jpg" .id }}
+      {{ $staticPath := path.Join "static" $imgPath }}
+      {{ $hasImage := fileExists $staticPath }}
+
+      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}">
+        <div class="pokemon-card__media">
+          {{ if $hasImage }}
+            <img src="/{{ $imgPath }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy">
+            <span class="badge badge--done">Já feito</span>
+          {{ else }}
+            <div class="pokemon-card__placeholder" aria-hidden="true">
+              <span class="pokemon-card__silhouette" aria-hidden="true"></span>
+              <span class="pokemon-card__name-placeholder">{{ .name }}</span>
+            </div>
+            <span class="badge badge--soon">Em breve</span>
+          {{ end }}
+        </div>
+        <div class="pokemon-card__body">
+          <h2 class="pokemon-card__title">{{ .name }}</h2>
+          <p class="pokemon-card__id">#{{ printf "%03d" .id }}</p>
+          <a href="https://wa.me/{{ $whatsapp }}?text=Olá! Vi o Pokémon {{ .name }} no teu site 🙂" class="btn btn-whatsapp" target="_blank" rel="noopener">Contactar no WhatsApp</a>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+
+  {{ .Content }}
+</div>
+{{ end }}

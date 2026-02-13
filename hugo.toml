@@ -4,7 +4,7 @@
 baseURL = "https://danielmoraiswave.github.io/DM-PrintDex/"
 languageCode = "pt-pt"
 title = "DM-PrintDex — Pokémon 3D"
-theme = ""
+# Sem theme: usamos apenas os layouts do projeto.
 
 # Número de WhatsApp para contacto (apenas dígitos, com código do país)
 # Exemplo: 351912345678 para Portugal

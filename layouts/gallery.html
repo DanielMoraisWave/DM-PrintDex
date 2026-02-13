@@ -12,8 +12,7 @@
     {{ range site.Data.pokemon }}
       {{ $id := int .id }}
       {{ $imgPath := printf "pokemon/%03d/1.jpg" $id }}
-      {{ $staticPath := path.Join "static" $imgPath }}
-      {{ $hasImage := fileExists $staticPath }}
+      {{ $hasImage := eq .image true }}
 
       <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}">
         <div class="pokemon-card__media">

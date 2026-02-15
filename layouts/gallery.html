@@ -7,8 +7,7 @@
     <p class="lead">{{ .Param "description" | default .Summary }}</p>
     <label for="gen-filter" class="gen-filter-label">Geração</label>
     <select id="gen-filter" class="gen-filter" aria-label="Filtrar por geração">
-      <option value="all">Todas</option>
-      <option value="1">Geração 1 (Kanto)</option>
+      <option value="1" selected>Geração 1 (Kanto)</option>
       <option value="2">Geração 2 (Johto)</option>
       <option value="3">Geração 3 (Hoenn)</option>
       <option value="4">Geração 4 (Sinnoh)</option>
@@ -59,13 +58,14 @@
   var grid = document.querySelector('.pokemon-grid');
   if (!select || !grid) return;
   var cards = grid.querySelectorAll('.pokemon-card');
-  select.addEventListener('change', function() {
-    var val = this.value;
+  function filter() {
+    var val = select.value;
     cards.forEach(function(card) {
-      var show = val === 'all' || card.getAttribute('data-generation') === val;
-      card.style.display = show ? '' : 'none';
+      card.style.display = card.getAttribute('data-generation') === val ? '' : 'none';
     });
-  });
+  }
+  filter();
+  select.addEventListener('change', filter);
 })();
 </script>
 {{ end }}

@@ -166,6 +166,43 @@ body {
   color: var(--color-muted);
 }
 
+/* Dropdown filtro por geração */
+.gen-filter-label {
+  display: block;
+  margin-top: 1rem;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-text);
+}
+.gen-filter {
+  display: block;
+  width: 100%;
+  max-width: 280px;
+  padding: 0.6rem 2rem 0.6rem 0.75rem;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+  cursor: pointer;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%238b949e' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10l-5 5z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 0.75rem center;
+}
+.gen-filter:hover,
+.gen-filter:focus {
+  border-color: var(--color-accent);
+  outline: none;
+}
+@media (min-width: 640px) {
+  .gen-filter {
+    max-width: 320px;
+  }
+}
+
 .page-content {
   max-width: 65ch;
 }

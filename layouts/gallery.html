@@ -5,16 +5,30 @@
   <header class="page-header">
     <h1>{{ .Title }}</h1>
     <p class="lead">{{ .Param "description" | default .Summary }}</p>
+    <label for="gen-filter" class="gen-filter-label">Geração</label>
+    <select id="gen-filter" class="gen-filter" aria-label="Filtrar por geração">
+      <option value="all">Todas</option>
+      <option value="1">Geração 1 (Kanto)</option>
+      <option value="2">Geração 2 (Johto)</option>
+      <option value="3">Geração 3 (Hoenn)</option>
+      <option value="4">Geração 4 (Sinnoh)</option>
+      <option value="5">Geração 5 (Unova)</option>
+      <option value="6">Geração 6 (Kalos)</option>
+      <option value="7">Geração 7 (Alola)</option>
+      <option value="8">Geração 8 (Galar)</option>
+      <option value="9">Geração 9 (Paldea)</option>
+    </select>
   </header>
 
   <div class="pokemon-grid">
     {{ $whatsapp := .Site.Params.whatsapp_number }}
     {{ range site.Data.pokemon }}
       {{ $id := int .id }}
+      {{ $gen := cond (ge $id 906) 9 (cond (ge $id 810) 8 (cond (ge $id 722) 7 (cond (ge $id 650) 6 (cond (ge $id 494) 5 (cond (ge $id 387) 4 (cond (ge $id 252) 3 (cond (ge $id 152) 2 1))))))) }}
       {{ $imgPath := printf "pokemon/%03d/1.jpg" $id }}
       {{ $hasImage := eq .image true }}
 
-      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}">
+      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}">
         <div class="pokemon-card__media">
           {{ if $hasImage }}
             <img src="{{ .Site.BaseURL }}{{ $imgPath }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy">
@@ -38,6 +52,22 @@
 
   {{ .Content }}
 </div>
+
+<script>
+(function() {
+  var select = document.getElementById('gen-filter');
+  var grid = document.querySelector('.pokemon-grid');
+  if (!select || !grid) return;
+  var cards = grid.querySelectorAll('.pokemon-card');
+  select.addEventListener('change', function() {
+    var val = this.value;
+    cards.forEach(function(card) {
+      var show = val === 'all' || card.getAttribute('data-generation') === val;
+      card.style.display = show ? '' : 'none';
+    });
+  });
+})();
+</script>
 {{ end }}
 
 

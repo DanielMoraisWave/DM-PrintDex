@@ -41,12 +41,17 @@
       {{ $id := int .id }}
       {{ $gen := cond (ge $id 906) 9 (cond (ge $id 810) 8 (cond (ge $id 722) 7 (cond (ge $id 650) 6 (cond (ge $id 494) 5 (cond (ge $id 387) 4 (cond (ge $id 252) 3 (cond (ge $id 152) 2 1))))))) }}
       {{ $imgPath := printf "%03d/1.jpg" $id }}
+      {{ $imgURL := $imgPath | absURL }}
       {{ $hasImage := eq .image true }}
 
       <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}" data-done="{{ if $hasImage }}true{{ else }}false{{ end }}">
         <div class="pokemon-card__media">
           {{ if $hasImage }}
-            <img src="{{ .Site.BaseURL }}{{ $imgPath }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy">
+            <img src="{{ $imgURL }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pokemon-card__placeholder pokemon-card__placeholder--fallback" style="display:none" aria-hidden="true">
+              <span class="pokemon-card__silhouette"></span>
+              <span class="pokemon-card__name-placeholder">{{ .name }}</span>
+            </div>
             <span class="badge badge--done">Já feito</span>
           {{ else }}
             <div class="pokemon-card__placeholder" aria-hidden="true">

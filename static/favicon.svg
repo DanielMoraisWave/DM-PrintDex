@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" fill="none">
+  <circle cx="16" cy="16" r="14" fill="none" stroke="#1a1a1a" stroke-width="1.5"/>
+  <!-- Top half: red (above y=16), flat edge at y=14 for the band -->
+  <path d="M16 2 A14 14 0 0 1 29.86 14 L2.14 14 A14 14 0 0 1 16 2 Z" fill="#e3350d"/>
+  <!-- Bottom half: white (below y=16), flat edge at y=18 for the band -->
+  <path d="M16 30 A14 14 0 0 1 2.14 18 L29.86 18 A14 14 0 0 1 16 30 Z" fill="#fff"/>
+  <!-- Central black band -->
+  <rect x="2" y="14" width="28" height="4" fill="#1a1a1a"/>
+  <!-- Center button -->
+  <circle cx="16" cy="16" r="4" fill="#1a1a1a"/>
+  <circle cx="16" cy="16" r="2" fill="#fff"/>
+</svg>

@@ -5,8 +5,14 @@
   <header class="page-header">
     <h1>{{ .Title }}</h1>
     <p class="lead">{{ .Param "description" | default .Summary }}</p>
-    <label for="gen-filter" class="gen-filter-label">Geração</label>
-    <select id="gen-filter" class="gen-filter" aria-label="Filtrar por geração">
+    <div class="gallery-filters">
+      <div class="filter-group">
+        <label for="search-filter" class="filter-label">Pesquisar</label>
+        <input type="search" id="search-filter" class="search-filter" placeholder="Nome do Pokémon..." aria-label="Pesquisar por nome" autocomplete="off">
+      </div>
+      <div class="filter-group">
+        <label for="gen-filter" class="filter-label">Geração</label>
+        <select id="gen-filter" class="gen-filter" aria-label="Filtrar por geração">
       <option value="1" selected>Geração 1 (Kanto)</option>
       <option value="2">Geração 2 (Johto)</option>
       <option value="3">Geração 3 (Hoenn)</option>
@@ -17,6 +23,8 @@
       <option value="8">Geração 8 (Galar)</option>
       <option value="9">Geração 9 (Paldea)</option>
     </select>
+      </div>
+    </div>
   </header>
 
   <div class="pokemon-grid">
@@ -27,7 +35,7 @@
       {{ $imgPath := printf "pokemon/%03d/1.jpg" $id }}
       {{ $hasImage := eq .image true }}
 
-      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}">
+      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}">
         <div class="pokemon-card__media">
           {{ if $hasImage }}
             <img src="{{ .Site.BaseURL }}{{ $imgPath }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy">
@@ -55,17 +63,25 @@
 <script>
 (function() {
   var select = document.getElementById('gen-filter');
+  var search = document.getElementById('search-filter');
   var grid = document.querySelector('.pokemon-grid');
   if (!select || !grid) return;
   var cards = grid.querySelectorAll('.pokemon-card');
   function filter() {
-    var val = select.value;
+    var gen = select.value;
+    var q = (search && search.value) ? search.value.trim().toLowerCase() : '';
     cards.forEach(function(card) {
-      card.style.display = card.getAttribute('data-generation') === val ? '' : 'none';
+      var matchGen = card.getAttribute('data-generation') === gen;
+      var matchSearch = !q || (card.getAttribute('data-name') || '').indexOf(q) !== -1;
+      card.style.display = matchGen && matchSearch ? '' : 'none';
     });
   }
   filter();
   select.addEventListener('change', filter);
+  if (search) {
+    search.addEventListener('input', filter);
+    search.addEventListener('search', filter);
+  }
 })();
 </script>
 {{ end }}

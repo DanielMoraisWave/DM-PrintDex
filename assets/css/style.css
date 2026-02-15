@@ -166,19 +166,48 @@ body {
   color: var(--color-muted);
 }
 
-/* Dropdown filtro por geração */
-.gen-filter-label {
-  display: block;
+/* Filtros da galeria */
+.gallery-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 1.5rem;
   margin-top: 1rem;
+  align-items: flex-end;
+}
+.filter-group {
+  flex: 1;
+  min-width: 0;
+  max-width: 320px;
+}
+.filter-label {
+  display: block;
   margin-bottom: 0.35rem;
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--color-text);
 }
+.search-filter {
+  display: block;
+  width: 100%;
+  padding: 0.6rem 0.75rem;
+  font-size: 1rem;
+  font-family: var(--font-sans);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius);
+}
+.search-filter::placeholder {
+  color: var(--color-muted);
+}
+.search-filter:hover,
+.search-filter:focus {
+  border-color: var(--color-accent);
+  outline: none;
+}
 .gen-filter {
   display: block;
   width: 100%;
-  max-width: 280px;
   padding: 0.6rem 2rem 0.6rem 0.75rem;
   font-size: 1rem;
   font-family: var(--font-sans);
@@ -198,8 +227,8 @@ body {
   outline: none;
 }
 @media (min-width: 640px) {
-  .gen-filter {
-    max-width: 320px;
+  .filter-group {
+    max-width: 280px;
   }
 }
 

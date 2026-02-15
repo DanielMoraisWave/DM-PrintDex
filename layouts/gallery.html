@@ -40,7 +40,7 @@
     {{ range site.Data.pokemon }}
       {{ $id := int .id }}
       {{ $gen := cond (ge $id 906) 9 (cond (ge $id 810) 8 (cond (ge $id 722) 7 (cond (ge $id 650) 6 (cond (ge $id 494) 5 (cond (ge $id 387) 4 (cond (ge $id 252) 3 (cond (ge $id 152) 2 1))))))) }}
-      {{ $imgPath := printf "pokemon/%03d/1.jpg" $id }}
+      {{ $imgPath := printf "%03d/1.jpg" $id }}
       {{ $hasImage := eq .image true }}
 
       <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}" data-done="{{ if $hasImage }}true{{ else }}false{{ end }}">

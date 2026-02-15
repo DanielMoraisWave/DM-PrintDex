@@ -312,10 +312,34 @@ body {
   flex: 1;
 }
 
+.pokemon-card__header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-bottom: 0.25rem;
+}
+
 .pokemon-card__title {
   margin: 0;
   font-size: 1.125rem;
   font-weight: 600;
+  flex: 1;
+  min-width: 0;
+}
+
+.pokemon-card__price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--color-accent);
+  flex-shrink: 0;
+  white-space: nowrap;
+}
+
+.pokemon-card__price--tbd {
+  font-weight: 500;
+  color: var(--color-muted);
+  font-size: 0.85rem;
 }
 
 .pokemon-card__id {

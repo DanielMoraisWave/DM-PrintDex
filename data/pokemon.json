@@ -1033,7 +1033,8 @@
   {
     "id": 258,
     "name": "Mudkip",
-    "image": true
+    "image": true,
+    "price": "12 €"
   },
   {
     "id": 259,

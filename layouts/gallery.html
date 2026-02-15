@@ -24,6 +24,14 @@
       <option value="9">Geração 9 (Paldea)</option>
     </select>
       </div>
+      <div class="filter-group">
+        <label for="state-filter" class="filter-label">Estado</label>
+        <select id="state-filter" class="gen-filter state-filter" aria-label="Filtrar por estado">
+          <option value="all">Todos</option>
+          <option value="done">Já feitos</option>
+          <option value="soon">Em breve</option>
+        </select>
+      </div>
     </div>
   </header>
 
@@ -35,7 +43,7 @@
       {{ $imgPath := printf "pokemon/%03d/1.jpg" $id }}
       {{ $hasImage := eq .image true }}
 
-      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}">
+      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}" data-done="{{ if $hasImage }}true{{ else }}false{{ end }}">
         <div class="pokemon-card__media">
           {{ if $hasImage }}
             <img src="{{ .Site.BaseURL }}{{ $imgPath }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy">
@@ -49,7 +57,12 @@
           {{ end }}
         </div>
         <div class="pokemon-card__body">
-          <h2 class="pokemon-card__title">{{ .name }}</h2>
+          <div class="pokemon-card__header">
+            <h2 class="pokemon-card__title">{{ .name }}</h2>
+            <span class="pokemon-card__price {{ if not (or .price .valor) }}pokemon-card__price--tbd{{ end }}">
+              {{ if .price }}{{ .price }}{{ else }}{{ if .valor }}{{ .valor }}{{ else }}Valor a definir{{ end }}{{ end }}
+            </span>
+          </div>
           <p class="pokemon-card__id">#{{ printf "%03d" $id }}</p>
           <a href="https://wa.me/{{ $whatsapp }}?text=Olá! Vi o Pokémon {{ .name }} no teu site 🙂" class="btn btn-whatsapp" target="_blank" rel="noopener">Contactar no WhatsApp</a>
         </div>
@@ -64,20 +77,25 @@
 (function() {
   var select = document.getElementById('gen-filter');
   var search = document.getElementById('search-filter');
+  var stateSelect = document.getElementById('state-filter');
   var grid = document.querySelector('.pokemon-grid');
   if (!select || !grid) return;
   var cards = grid.querySelectorAll('.pokemon-card');
   function filter() {
     var gen = select.value;
+    var state = stateSelect ? stateSelect.value : 'all';
     var q = (search && search.value) ? search.value.trim().toLowerCase() : '';
     cards.forEach(function(card) {
       var matchGen = card.getAttribute('data-generation') === gen;
       var matchSearch = !q || (card.getAttribute('data-name') || '').indexOf(q) !== -1;
-      card.style.display = matchGen && matchSearch ? '' : 'none';
+      var done = card.getAttribute('data-done') === 'true';
+      var matchState = state === 'all' || (state === 'done' && done) || (state === 'soon' && !done);
+      card.style.display = matchGen && matchSearch && matchState ? '' : 'none';
     });
   }
   filter();
   select.addEventListener('change', filter);
+  if (stateSelect) stateSelect.addEventListener('change', filter);
   if (search) {
     search.addEventListener('input', filter);
     search.addEventListener('search', filter);

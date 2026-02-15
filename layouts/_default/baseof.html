@@ -10,11 +10,11 @@
 <body>
   <header class="site-header">
     <nav class="container">
-      <a href="{{ "/DM-PrintDex/" | relURL }}" class="logo">{{ .Site.Title }}</a>
+      <a href="{{ .Site.BaseURL }}" class="logo">{{ .Site.Title }}</a>
       <ul class="nav-links">
-        <li><a href="{{ "/DM-PrintDex/" | relURL }}">Início</a></li>
-        <li><a href="{{ "/DM-PrintDex/gallery/" | relURL }}">Galeria</a></li>
-        <li><a href="{{ "/DM-PrintDex/sobre/" | relURL }}">Sobre</a></li>
+        <li><a href="{{ .Site.BaseURL }}">Início</a></li>
+        <li><a href="{{ .Site.BaseURL }}gallery/">Galeria</a></li>
+        <li><a href="{{ .Site.BaseURL }}sobre/">Sobre</a></li>
       </ul>
     </nav>
   </header>

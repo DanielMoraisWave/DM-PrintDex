@@ -414,7 +414,8 @@
   {
     "id": 104,
     "name": "Cubone",
-    "image": true
+    "image": true,
+    "price": "15 €"
   },
   {
     "id": 105,
@@ -4105,3 +4106,4 @@
     "name": "Pecharunt"
   }
 ]
+

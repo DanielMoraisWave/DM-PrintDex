@@ -381,3 +381,39 @@ body {
     gap: 1.5rem;
   }
 }
+
+/* Compact cards for 3-column mobile */
+@media (max-width: 599px) {
+  .pokemon-card__silhouette {
+    width: 40px;
+    height: 40px;
+  }
+  .pokemon-card__name-placeholder {
+    display: none;
+  }
+  .pokemon-card__body {
+    padding: 0.35rem 0.4rem;
+  }
+  .pokemon-card__title {
+    font-size: 0.65rem;
+  }
+  .pokemon-card__price {
+    font-size: 0.6rem;
+  }
+  .pokemon-card__price--tbd {
+    font-size: 0.55rem;
+  }
+  .pokemon-card__id {
+    font-size: 0.55rem;
+    margin: 0.1rem 0 0;
+  }
+  .btn-whatsapp {
+    font-size: 0.55rem;
+    padding: 0.3rem 0.2rem;
+    margin-top: 0.3rem;
+  }
+  .badge {
+    font-size: 0.55rem;
+    padding: 0.15rem 0.3rem;
+  }
+}

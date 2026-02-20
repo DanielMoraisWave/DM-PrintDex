@@ -415,7 +415,7 @@
     "id": 104,
     "name": "Cubone",
     "image": true,
-    "price": "15 €"
+    "price": "15"
   },
   {
     "id": 105,
@@ -1035,7 +1035,7 @@
     "id": 258,
     "name": "Mudkip",
     "image": true,
-    "price": "12 €"
+    "price": "12"
   },
   {
     "id": 259,
@@ -4106,4 +4106,5 @@
     "name": "Pecharunt"
   }
 ]
+
 

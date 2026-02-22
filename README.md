@@ -1,6 +1,6 @@
 # DM-PrintDex
 
-Galeria de Pokémon impressos em 3D e pintados à mão.
+Coleção de Pokémon impressos em 3D e pintados à mão.
 
 **Site:** https://danielmoraiswave.github.io/DM-PrintDex/
 

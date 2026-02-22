@@ -1,4 +1,4 @@
-# DM-PrintDex — Galeria Pokémon 3D
+# DM-PrintDex — Coleção Pokémon 3D
 # Site estático Hugo para vitrine de Pokémon impressos em 3D e pintados à mão.
 
 baseURL = "https://danielmoraiswave.github.io/DM-PrintDex/"
@@ -10,7 +10,7 @@ title = "DM-PrintDex — Pokémon 3D"
 # Exemplo: 351912345678 para Portugal
 [params]
 whatsapp_number = "351917009552"
-description = "Galeria de Pokémon impressos em 3D e pintados à mão. Contacta via WhatsApp."
+description = "Coleção de Pokémon impressos em 3D e pintados à mão. Contacta via WhatsApp."
 
 # Desativar taxonomias não usadas
 disableKinds = ["taxonomy", "term", "RSS"]

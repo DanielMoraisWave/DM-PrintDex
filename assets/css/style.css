@@ -239,8 +239,8 @@ body {
 /* Grid da galeria — mobile-first */
 .pokemon-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 0.5rem;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0.75rem;
   margin-top: 1.5rem;
 }
 
@@ -382,38 +382,35 @@ body {
   }
 }
 
-/* Compact cards for 3-column mobile */
+/* Compact cards for 2-column mobile */
 @media (max-width: 599px) {
   .pokemon-card__silhouette {
-    width: 40px;
-    height: 40px;
-  }
-  .pokemon-card__name-placeholder {
-    display: none;
+    width: 56px;
+    height: 56px;
   }
   .pokemon-card__body {
-    padding: 0.35rem 0.4rem;
+    padding: 0.5rem 0.6rem;
   }
   .pokemon-card__title {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
   }
   .pokemon-card__price {
-    font-size: 0.6rem;
+    font-size: 0.8rem;
   }
   .pokemon-card__price--tbd {
-    font-size: 0.55rem;
+    font-size: 0.7rem;
   }
   .pokemon-card__id {
-    font-size: 0.55rem;
-    margin: 0.1rem 0 0;
+    font-size: 0.7rem;
+    margin: 0.15rem 0 0;
   }
   .btn-whatsapp {
-    font-size: 0.55rem;
-    padding: 0.3rem 0.2rem;
-    margin-top: 0.3rem;
+    font-size: 0.7rem;
+    padding: 0.35rem 0.25rem;
+    margin-top: 0.4rem;
   }
   .badge {
-    font-size: 0.55rem;
-    padding: 0.15rem 0.3rem;
+    font-size: 0.65rem;
+    padding: 0.2rem 0.4rem;
   }
 }

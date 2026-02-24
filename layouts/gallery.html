@@ -32,6 +32,13 @@
           <option value="soon">Em breve</option>
         </select>
       </div>
+      <div class="filter-group">
+        <label for="sort-filter" class="filter-label">Ordem</label>
+        <select id="sort-filter" class="gen-filter" aria-label="Ordenar">
+          <option value="done-first">Feitos primeiro</option>
+          <option value="number">Número</option>
+        </select>
+      </div>
     </div>
   </header>
 
@@ -44,7 +51,7 @@
       {{ $imgURL := $imgPath | absURL }}
       {{ $hasImage := eq .image true }}
 
-      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}" data-done="{{ if $hasImage }}true{{ else }}false{{ end }}">
+      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}" data-done="{{ if $hasImage }}true{{ else }}false{{ end }}" data-id="{{ $id }}">
         <div class="pokemon-card__media">
           {{ if $hasImage }}
             <img src="{{ $imgURL }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
@@ -83,24 +90,51 @@
   var select = document.getElementById('gen-filter');
   var search = document.getElementById('search-filter');
   var stateSelect = document.getElementById('state-filter');
+  var sortSelect = document.getElementById('sort-filter');
   var grid = document.querySelector('.pokemon-grid');
   if (!select || !grid) return;
-  var cards = grid.querySelectorAll('.pokemon-card');
+  var cards = Array.from(grid.querySelectorAll('.pokemon-card'));
   function filter() {
     var gen = select.value;
     var state = stateSelect ? stateSelect.value : 'all';
+    var sort = sortSelect ? sortSelect.value : 'done-first';
     var q = (search && search.value) ? search.value.trim().toLowerCase() : '';
+    var visible = [];
+    var hidden = [];
     cards.forEach(function(card) {
       var matchGen = card.getAttribute('data-generation') === gen;
       var matchSearch = !q || (card.getAttribute('data-name') || '').indexOf(q) !== -1;
       var done = card.getAttribute('data-done') === 'true';
       var matchState = state === 'all' || (state === 'done' && done) || (state === 'soon' && !done);
-      card.style.display = matchGen && matchSearch && matchState ? '' : 'none';
+      if (matchGen && matchSearch && matchState) {
+        visible.push(card);
+      } else {
+        hidden.push(card);
+      }
+    });
+    visible.sort(function(a, b) {
+      var aId = parseInt(a.getAttribute('data-id') || '0');
+      var bId = parseInt(b.getAttribute('data-id') || '0');
+      if (sort === 'done-first') {
+        var aDone = a.getAttribute('data-done') === 'true';
+        var bDone = b.getAttribute('data-done') === 'true';
+        if (aDone !== bDone) return aDone ? -1 : 1;
+      }
+      return aId - bId;
+    });
+    visible.forEach(function(card) {
+      card.style.display = '';
+      grid.appendChild(card);
+    });
+    hidden.forEach(function(card) {
+      card.style.display = 'none';
+      grid.appendChild(card);
     });
   }
   filter();
   select.addEventListener('change', filter);
   if (stateSelect) stateSelect.addEventListener('change', filter);
+  if (sortSelect) sortSelect.addEventListener('change', filter);
   if (search) {
     search.addEventListener('input', filter);
     search.addEventListener('search', filter);

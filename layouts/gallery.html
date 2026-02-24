@@ -49,55 +49,13 @@
           {{ if $hasImage }}
             <img src="{{ $imgURL }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="pokemon-card__placeholder pokemon-card__placeholder--fallback" style="display:none" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 132" class="pokemon-card__silhouette" aria-hidden="true">
-                <g fill="rgba(255,255,255,0.15)">
-                  <!-- Cauda relâmpago (desenhada primeiro, corpo cobre a ligação) -->
-                  <path d="M84,80 L98,50 L110,60 L96,82 L112,72 L120,82 L100,108 L88,100 Z"/>
-                  <!-- Orelha esquerda — alta, fina, inclinada à esquerda -->
-                  <path d="M32,50 L18,4 L46,32 Z"/>
-                  <!-- Orelha direita — alta, fina, inclinada à direita -->
-                  <path d="M82,50 L100,4 L70,32 Z"/>
-                  <!-- Cabeça -->
-                  <circle cx="57" cy="57" r="29"/>
-                  <!-- Corpo -->
-                  <ellipse cx="55" cy="97" rx="23" ry="25"/>
-                  <!-- Braço esquerdo -->
-                  <ellipse cx="27" cy="90" rx="12" ry="7" transform="rotate(-30,27,90)"/>
-                  <!-- Braço direito -->
-                  <ellipse cx="76" cy="82" rx="11" ry="7" transform="rotate(15,76,82)"/>
-                  <!-- Perna esquerda -->
-                  <ellipse cx="42" cy="121" rx="13" ry="8"/>
-                  <!-- Perna direita -->
-                  <ellipse cx="67" cy="121" rx="13" ry="8"/>
-                </g>
-              </svg>
+              <span class="pokemon-card__silhouette"></span>
               <span class="pokemon-card__name-placeholder">{{ .name }}</span>
             </div>
             <span class="badge badge--done">Já feito</span>
           {{ else }}
             <div class="pokemon-card__placeholder" aria-hidden="true">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 128 132" class="pokemon-card__silhouette" aria-hidden="true">
-                <g fill="rgba(255,255,255,0.15)">
-                  <!-- Cauda relâmpago (desenhada primeiro, corpo cobre a ligação) -->
-                  <path d="M84,80 L98,50 L110,60 L96,82 L112,72 L120,82 L100,108 L88,100 Z"/>
-                  <!-- Orelha esquerda — alta, fina, inclinada à esquerda -->
-                  <path d="M32,50 L18,4 L46,32 Z"/>
-                  <!-- Orelha direita — alta, fina, inclinada à direita -->
-                  <path d="M82,50 L100,4 L70,32 Z"/>
-                  <!-- Cabeça -->
-                  <circle cx="57" cy="57" r="29"/>
-                  <!-- Corpo -->
-                  <ellipse cx="55" cy="97" rx="23" ry="25"/>
-                  <!-- Braço esquerdo -->
-                  <ellipse cx="27" cy="90" rx="12" ry="7" transform="rotate(-30,27,90)"/>
-                  <!-- Braço direito -->
-                  <ellipse cx="76" cy="82" rx="11" ry="7" transform="rotate(15,76,82)"/>
-                  <!-- Perna esquerda -->
-                  <ellipse cx="42" cy="121" rx="13" ry="8"/>
-                  <!-- Perna direita -->
-                  <ellipse cx="67" cy="121" rx="13" ry="8"/>
-                </g>
-              </svg>
+              <span class="pokemon-card__silhouette"></span>
               <span class="pokemon-card__name-placeholder">{{ .name }}</span>
             </div>
             <span class="badge badge--soon">Em breve</span>

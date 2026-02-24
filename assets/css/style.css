@@ -295,8 +295,6 @@ body {
 .pokemon-card__silhouette {
   width: 80px;
   height: 80px;
-  background: rgba(255, 255, 255, 0.08);
-  border-radius: 50%;
   flex-shrink: 0;
 }
 
@@ -385,8 +383,8 @@ body {
 /* Compact cards for 2-column mobile */
 @media (max-width: 599px) {
   .pokemon-card__silhouette {
-    width: 56px;
-    height: 56px;
+    width: 60px;
+    height: 60px;
   }
   .pokemon-card__body {
     padding: 0.5rem 0.6rem;

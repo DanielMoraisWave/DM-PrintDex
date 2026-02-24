@@ -49,13 +49,35 @@
           {{ if $hasImage }}
             <img src="{{ $imgURL }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
             <div class="pokemon-card__placeholder pokemon-card__placeholder--fallback" style="display:none" aria-hidden="true">
-              <span class="pokemon-card__silhouette"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 115" class="pokemon-card__silhouette" aria-hidden="true">
+                <g fill="rgba(255,255,255,0.15)">
+                  <path d="M28,46 L22,8 L46,38 Z"/>
+                  <path d="M72,46 L78,8 L54,38 Z"/>
+                  <circle cx="50" cy="55" r="28"/>
+                  <ellipse cx="50" cy="90" rx="26" ry="22"/>
+                  <ellipse cx="22" cy="85" rx="10" ry="6" transform="rotate(-20,22,85)"/>
+                  <ellipse cx="78" cy="85" rx="10" ry="6" transform="rotate(20,78,85)"/>
+                  <ellipse cx="38" cy="110" rx="10" ry="7"/>
+                  <ellipse cx="62" cy="110" rx="10" ry="7"/>
+                </g>
+              </svg>
               <span class="pokemon-card__name-placeholder">{{ .name }}</span>
             </div>
             <span class="badge badge--done">Já feito</span>
           {{ else }}
             <div class="pokemon-card__placeholder" aria-hidden="true">
-              <span class="pokemon-card__silhouette" aria-hidden="true"></span>
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 115" class="pokemon-card__silhouette" aria-hidden="true">
+                <g fill="rgba(255,255,255,0.15)">
+                  <path d="M28,46 L22,8 L46,38 Z"/>
+                  <path d="M72,46 L78,8 L54,38 Z"/>
+                  <circle cx="50" cy="55" r="28"/>
+                  <ellipse cx="50" cy="90" rx="26" ry="22"/>
+                  <ellipse cx="22" cy="85" rx="10" ry="6" transform="rotate(-20,22,85)"/>
+                  <ellipse cx="78" cy="85" rx="10" ry="6" transform="rotate(20,78,85)"/>
+                  <ellipse cx="38" cy="110" rx="10" ry="7"/>
+                  <ellipse cx="62" cy="110" rx="10" ry="7"/>
+                </g>
+              </svg>
               <span class="pokemon-card__name-placeholder">{{ .name }}</span>
             </div>
             <span class="badge badge--soon">Em breve</span>

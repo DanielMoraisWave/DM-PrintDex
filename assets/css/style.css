@@ -236,6 +236,16 @@ body {
   max-width: 65ch;
 }
 
+/* Secção de destaques na homepage */
+.featured-section {
+  margin-top: 2rem;
+}
+
+.featured-title {
+  margin: 0 0 0.25rem;
+  font-size: 1.25rem;
+}
+
 /* Grid da galeria — mobile-first */
 .pokemon-grid {
   display: grid;

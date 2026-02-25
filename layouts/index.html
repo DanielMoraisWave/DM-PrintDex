@@ -5,9 +5,44 @@
   <div class="container">
     <h1>{{ .Title }}</h1>
     <p class="lead">{{ .Param "description" | default .Summary }}</p>
-    <a href="{{ .Site.BaseURL }}gallery/" class="btn btn-primary">Ver galeria</a>
+    <a href="{{ .Site.BaseURL }}gallery/" class="btn btn-primary">Ver Coleção</a>
   </div>
 </div>
+
+{{ $whatsapp := .Site.Params.whatsapp_number }}
+{{ $done := where site.Data.pokemon "image" true }}
+{{ if $done }}
+<section class="container featured-section">
+  <h2 class="featured-title">Já feitos</h2>
+  <div class="pokemon-grid">
+    {{ range first 4 (shuffle $done) }}
+      {{ $id := int .id }}
+      {{ $imgURL := printf "%03d/1.jpg" $id | absURL }}
+      <article class="pokemon-card">
+        <div class="pokemon-card__media">
+          <img src="{{ $imgURL }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+          <div class="pokemon-card__placeholder pokemon-card__placeholder--fallback" style="display:none" aria-hidden="true">
+            <span class="pokemon-card__silhouette"></span>
+            <span class="pokemon-card__name-placeholder">{{ .name }}</span>
+          </div>
+          <span class="badge badge--done">Já feito</span>
+        </div>
+        <div class="pokemon-card__body">
+          <div class="pokemon-card__header">
+            <h2 class="pokemon-card__title">{{ .name }}</h2>
+            <span class="pokemon-card__price {{ if not (or .price .valor) }}pokemon-card__price--tbd{{ end }}">
+              {{ if .price }}{{ .price }}{{ else if .valor }}{{ .valor }}{{ else }}Valor a definir{{ end }}
+            </span>
+          </div>
+          <p class="pokemon-card__id">#{{ printf "%03d" $id }}</p>
+          <a href="https://wa.me/{{ $whatsapp }}?text=Olá! Vi o Pokémon {{ .name }} no teu site 🙂" class="btn btn-whatsapp" target="_blank" rel="noopener">Contactar no WhatsApp</a>
+        </div>
+      </article>
+    {{ end }}
+  </div>
+</section>
+{{ end }}
+
 <section class="container intro">
   {{ .Content }}
 </section>

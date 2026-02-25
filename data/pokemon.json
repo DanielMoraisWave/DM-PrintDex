@@ -700,7 +700,8 @@
   {
     "id": 175,
     "name": "Togepi",
-    "image": true
+    "image": true,
+    "price": "15"
   },
   {
     "id": 176,
@@ -1021,7 +1022,8 @@
   {
     "id": 255,
     "name": "Torchic",
-    "image": true
+    "image": true,
+    "price": "12"
   },
   {
     "id": 256,

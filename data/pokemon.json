@@ -1501,11 +1501,15 @@
   },
   {
     "id": 374,
-    "name": "Beldum"
+    "name": "Beldum",
+    "image": true,
+    "price": "10"
   },
   {
     "id": 375,
-    "name": "Metang"
+    "name": "Metang",
+    "image": true,
+    "price": "25"
   },
   {
     "id": 376,

@@ -50,6 +50,7 @@
       {{ $imgPath := printf "%03d/1.jpg" $id }}
       {{ $imgURL := $imgPath | absURL }}
       {{ $hasImage := eq .image true }}
+      {{ $available := eq .available true }}
 
       <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}" data-done="{{ if $hasImage }}true{{ else }}false{{ end }}" data-id="{{ $id }}">
         <div class="pokemon-card__media">
@@ -65,7 +66,11 @@
               <span class="pokemon-card__silhouette"></span>
               <span class="pokemon-card__name-placeholder">{{ .name }}</span>
             </div>
-            <span class="badge badge--soon">Em breve</span>
+            {{ if $available }}
+              <span class="badge badge--available">Disponível</span>
+            {{ else }}
+              <span class="badge badge--soon">Em breve</span>
+            {{ end }}
           {{ end }}
         </div>
         <div class="pokemon-card__body">

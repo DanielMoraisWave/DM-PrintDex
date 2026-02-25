@@ -376,6 +376,11 @@ body {
   font-weight: 600;
 }
 
+.badge--available {
+  background: #e36209;
+  color: #fff;
+}
+
 .badge--done {
   background: var(--color-badge-done);
   color: #fff;

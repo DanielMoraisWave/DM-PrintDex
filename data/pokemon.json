@@ -1781,7 +1781,9 @@
   },
   {
     "id": 443,
-    "name": "Gible"
+    "name": "Gible",
+    "available": true,
+    "price": "15"
   },
   {
     "id": 444,

@@ -133,7 +133,7 @@
     var visible = [];
     var hidden = [];
     cards.forEach(function(card) {
-      var matchGen = card.getAttribute('data-generation') === gen;
+      var matchGen = q || card.getAttribute('data-generation') === gen;
       var matchSearch = !q || (card.getAttribute('data-name') || '').indexOf(q) !== -1;
       var done = card.getAttribute('data-done') === 'true';
       var matchState = state === 'all' || (state === 'done' && done) || (state === 'soon' && !done);

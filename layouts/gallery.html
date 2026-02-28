@@ -6,38 +6,45 @@
     <h1>{{ .Title }}</h1>
     <p class="lead">{{ .Param "description" | default .Summary }}</p>
     <div class="gallery-filters">
-      <div class="filter-group">
-        <label for="search-filter" class="filter-label">Pesquisar</label>
-        <input type="search" id="search-filter" class="search-filter" placeholder="Nome do Pokémon..." aria-label="Pesquisar por nome" autocomplete="off">
+      <div class="filter-group filter-group--search">
+        <input type="search" id="search-filter" class="search-filter" placeholder="Pesquisar Pokémon..." aria-label="Pesquisar por nome" autocomplete="off">
       </div>
-      <div class="filter-group">
-        <label for="gen-filter" class="filter-label">Geração</label>
-        <select id="gen-filter" class="gen-filter" aria-label="Filtrar por geração">
-      <option value="1" selected>Geração 1 (Kanto)</option>
-      <option value="2">Geração 2 (Johto)</option>
-      <option value="3">Geração 3 (Hoenn)</option>
-      <option value="4">Geração 4 (Sinnoh)</option>
-      <option value="5">Geração 5 (Unova)</option>
-      <option value="6">Geração 6 (Kalos)</option>
-      <option value="7">Geração 7 (Alola)</option>
-      <option value="8">Geração 8 (Galar)</option>
-      <option value="9">Geração 9 (Paldea)</option>
-    </select>
-      </div>
-      <div class="filter-group">
-        <label for="state-filter" class="filter-label">Estado</label>
-        <select id="state-filter" class="gen-filter state-filter" aria-label="Filtrar por estado">
-          <option value="all">Todos</option>
-          <option value="done">Já feitos</option>
-          <option value="soon">Em breve</option>
-        </select>
-      </div>
-      <div class="filter-group">
-        <label for="sort-filter" class="filter-label">Ordem</label>
-        <select id="sort-filter" class="gen-filter" aria-label="Ordenar">
-          <option value="done-first">Feitos primeiro</option>
-          <option value="number">Número</option>
-        </select>
+      <div class="filter-dropdown">
+        <button type="button" id="filter-toggle" class="btn btn-filter" aria-expanded="false" aria-controls="filter-panel">
+          <svg class="filter-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3"/></svg>
+          Filtros
+        </button>
+        <div id="filter-panel" class="filter-panel" hidden>
+          <div class="filter-panel__group">
+            <label for="gen-filter" class="filter-label">Geração</label>
+            <select id="gen-filter" class="gen-filter" aria-label="Filtrar por geração">
+              <option value="1" selected>Geração 1 (Kanto)</option>
+              <option value="2">Geração 2 (Johto)</option>
+              <option value="3">Geração 3 (Hoenn)</option>
+              <option value="4">Geração 4 (Sinnoh)</option>
+              <option value="5">Geração 5 (Unova)</option>
+              <option value="6">Geração 6 (Kalos)</option>
+              <option value="7">Geração 7 (Alola)</option>
+              <option value="8">Geração 8 (Galar)</option>
+              <option value="9">Geração 9 (Paldea)</option>
+            </select>
+          </div>
+          <div class="filter-panel__group">
+            <label for="state-filter" class="filter-label">Estado</label>
+            <select id="state-filter" class="gen-filter" aria-label="Filtrar por estado">
+              <option value="all">Todos</option>
+              <option value="done">Já feitos</option>
+              <option value="soon">Em breve</option>
+            </select>
+          </div>
+          <div class="filter-panel__group">
+            <label for="sort-filter" class="filter-label">Ordem</label>
+            <select id="sort-filter" class="gen-filter" aria-label="Ordenar">
+              <option value="done-first">Feitos primeiro</option>
+              <option value="number">Número</option>
+            </select>
+          </div>
+        </div>
       </div>
     </div>
   </header>
@@ -92,6 +99,25 @@
 
 <script>
 (function() {
+  // Filter panel toggle
+  var toggleBtn = document.getElementById('filter-toggle');
+  var panel = document.getElementById('filter-panel');
+  if (toggleBtn && panel) {
+    toggleBtn.addEventListener('click', function() {
+      var isOpen = !panel.hidden;
+      panel.hidden = isOpen;
+      toggleBtn.setAttribute('aria-expanded', !isOpen);
+      toggleBtn.classList.toggle('btn-filter--active', !isOpen);
+    });
+    document.addEventListener('click', function(e) {
+      if (!panel.hidden && !panel.contains(e.target) && !toggleBtn.contains(e.target)) {
+        panel.hidden = true;
+        toggleBtn.setAttribute('aria-expanded', 'false');
+        toggleBtn.classList.remove('btn-filter--active');
+      }
+    });
+  }
+
   var select = document.getElementById('gen-filter');
   var search = document.getElementById('search-filter');
   var stateSelect = document.getElementById('state-filter');

@@ -58,8 +58,9 @@
       {{ $imgURL := $imgPath | absURL }}
       {{ $hasImage := eq .image true }}
       {{ $available := eq .available true }}
+      {{ $isDone := or $hasImage $available }}
 
-      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}" data-done="{{ if $hasImage }}true{{ else }}false{{ end }}" data-id="{{ $id }}">
+      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}" data-generation="{{ $gen }}" data-name="{{ lower .name }}" data-done="{{ if $isDone }}true{{ else }}false{{ end }}" data-id="{{ $id }}">
         <div class="pokemon-card__media">
           {{ if $hasImage }}
             <img src="{{ $imgURL }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">

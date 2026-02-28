@@ -21,7 +21,7 @@ Este site é uma montra dos Pokémon que imprimo em 3D e pinto à mão, para par
 - Shiny: Extra 5 a 10 - Combinação nova de cores
 - Pose específica: Extra 10 a 30 - Remodelação de pose e alteração das partes de impressão
 
-## Atenções !!!
+## Atenção !!!
 - Estes modelos são imprimidos em PLA+, que começa a deformar aos 60ºC, não mantenho qualquer responsabilidade se estes são
 expostos ao calor como no tablier de um carro ao sol
 - - Há planos para impressão com outros materiais, como PETG e ASA, para estes os valores serão ajustados.

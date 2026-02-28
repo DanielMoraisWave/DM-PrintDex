@@ -10,22 +10,34 @@
 </div>
 
 {{ $whatsapp := .Site.Params.whatsapp_number }}
-{{ $done := where site.Data.pokemon "image" true }}
+{{ $withImage := where site.Data.pokemon "image" true }}
+{{ $available := where site.Data.pokemon "available" true }}
+{{ $done := union $withImage $available }}
 {{ if $done }}
 <section class="container featured-section">
   <h2 class="featured-title">Já feitos</h2>
   <div class="pokemon-grid">
     {{ range first 4 (shuffle $done) }}
       {{ $id := int .id }}
+      {{ $hasImage := eq .image true }}
+      {{ $isAvailable := eq .available true }}
       {{ $imgURL := printf "%03d/1.jpg" $id | absURL }}
-      <article class="pokemon-card">
+      <article class="pokemon-card {{ if not $hasImage }}pokemon-card--placeholder{{ end }}">
         <div class="pokemon-card__media">
-          <img src="{{ $imgURL }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
-          <div class="pokemon-card__placeholder pokemon-card__placeholder--fallback" style="display:none" aria-hidden="true">
-            <span class="pokemon-card__silhouette"></span>
-            <span class="pokemon-card__name-placeholder">{{ .name }}</span>
-          </div>
-          <span class="badge badge--done">Já feito</span>
+          {{ if $hasImage }}
+            <img src="{{ $imgURL }}" alt="{{ .name }}" class="pokemon-card__img" loading="lazy" onerror="this.style.display='none';this.nextElementSibling.style.display='flex';">
+            <div class="pokemon-card__placeholder pokemon-card__placeholder--fallback" style="display:none" aria-hidden="true">
+              <span class="pokemon-card__silhouette"></span>
+              <span class="pokemon-card__name-placeholder">{{ .name }}</span>
+            </div>
+            <span class="badge badge--done">Já feito</span>
+          {{ else }}
+            <div class="pokemon-card__placeholder" aria-hidden="true">
+              <span class="pokemon-card__silhouette"></span>
+              <span class="pokemon-card__name-placeholder">{{ .name }}</span>
+            </div>
+            <span class="badge badge--available">Disponível</span>
+          {{ end }}
         </div>
         <div class="pokemon-card__body">
           <div class="pokemon-card__header">

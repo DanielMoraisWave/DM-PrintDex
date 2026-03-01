@@ -515,7 +515,9 @@
   },
   {
     "id": 129,
-    "name": "Magikarp"
+    "name": "Magikarp",
+    "image": true,
+    "price": "12"
   },
   {
     "id": 130,
@@ -527,7 +529,9 @@
   },
   {
     "id": 132,
-    "name": "Ditto"
+    "name": "Ditto",
+    "image": true,
+    "price": "10"
   },
   {
     "id": 133,

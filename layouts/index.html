@@ -10,9 +10,13 @@
 </div>
 
 {{ $whatsapp := .Site.Params.whatsapp_number }}
-{{ $withImage := where site.Data.pokemon "image" true }}
-{{ $available := where site.Data.pokemon "available" true }}
-{{ $done := union $withImage $available }}
+{{ $scratch := newScratch }}
+{{ range site.Data.pokemon }}
+  {{ if or (eq .image true) (eq .available true) }}
+    {{ $scratch.Add "done" (slice .) }}
+  {{ end }}
+{{ end }}
+{{ $done := $scratch.Get "done" }}
 {{ if $done }}
 <section class="container featured-section">
   <h2 class="featured-title">Já feitos</h2>

@@ -5,6 +5,17 @@
   <header class="page-header">
     <h1>{{ .Title }}</h1>
     <p class="lead">{{ .Param "description" | default .Summary }}</p>
+    <div class="gen-tabs" role="tablist" aria-label="Filtrar por geração">
+      <button class="gen-tab gen-tab--active" data-gen="1" role="tab" aria-selected="true">Gen 1<span class="gen-tab__sub">Kanto</span></button>
+      <button class="gen-tab" data-gen="2" role="tab" aria-selected="false">Gen 2<span class="gen-tab__sub">Johto</span></button>
+      <button class="gen-tab" data-gen="3" role="tab" aria-selected="false">Gen 3<span class="gen-tab__sub">Hoenn</span></button>
+      <button class="gen-tab" data-gen="4" role="tab" aria-selected="false">Gen 4<span class="gen-tab__sub">Sinnoh</span></button>
+      <button class="gen-tab" data-gen="5" role="tab" aria-selected="false">Gen 5<span class="gen-tab__sub">Unova</span></button>
+      <button class="gen-tab" data-gen="6" role="tab" aria-selected="false">Gen 6<span class="gen-tab__sub">Kalos</span></button>
+      <button class="gen-tab" data-gen="7" role="tab" aria-selected="false">Gen 7<span class="gen-tab__sub">Alola</span></button>
+      <button class="gen-tab" data-gen="8" role="tab" aria-selected="false">Gen 8<span class="gen-tab__sub">Galar</span></button>
+      <button class="gen-tab" data-gen="9" role="tab" aria-selected="false">Gen 9<span class="gen-tab__sub">Paldea</span></button>
+    </div>
     <div class="gallery-filters">
       <div class="filter-group filter-group--search">
         <input type="search" id="search-filter" class="search-filter" placeholder="Pesquisar Pokémon..." aria-label="Pesquisar por nome" autocomplete="off">
@@ -15,20 +26,6 @@
           Filtros
         </button>
         <div id="filter-panel" class="filter-panel" hidden>
-          <div class="filter-panel__group">
-            <label for="gen-filter" class="filter-label">Geração</label>
-            <select id="gen-filter" class="gen-filter" aria-label="Filtrar por geração">
-              <option value="1" selected>Geração 1 (Kanto)</option>
-              <option value="2">Geração 2 (Johto)</option>
-              <option value="3">Geração 3 (Hoenn)</option>
-              <option value="4">Geração 4 (Sinnoh)</option>
-              <option value="5">Geração 5 (Unova)</option>
-              <option value="6">Geração 6 (Kalos)</option>
-              <option value="7">Geração 7 (Alola)</option>
-              <option value="8">Geração 8 (Galar)</option>
-              <option value="9">Geração 9 (Paldea)</option>
-            </select>
-          </div>
           <div class="filter-panel__group">
             <label for="state-filter" class="filter-label">Estado</label>
             <select id="state-filter" class="gen-filter" aria-label="Filtrar por estado">
@@ -119,15 +116,27 @@
     });
   }
 
-  var select = document.getElementById('gen-filter');
+  // Generation tabs
+  var genTabs = Array.from(document.querySelectorAll('.gen-tab'));
+  var activeGen = '1';
+  genTabs.forEach(function(tab) {
+    tab.addEventListener('click', function() {
+      genTabs.forEach(function(t) { t.classList.remove('gen-tab--active'); t.setAttribute('aria-selected', 'false'); });
+      tab.classList.add('gen-tab--active');
+      tab.setAttribute('aria-selected', 'true');
+      activeGen = tab.getAttribute('data-gen');
+      filter();
+    });
+  });
+
   var search = document.getElementById('search-filter');
   var stateSelect = document.getElementById('state-filter');
   var sortSelect = document.getElementById('sort-filter');
   var grid = document.querySelector('.pokemon-grid');
-  if (!select || !grid) return;
+  if (!grid) return;
   var cards = Array.from(grid.querySelectorAll('.pokemon-card'));
   function filter() {
-    var gen = select.value;
+    var gen = activeGen;
     var state = stateSelect ? stateSelect.value : 'all';
     var sort = sortSelect ? sortSelect.value : 'done-first';
     var q = (search && search.value) ? search.value.trim().toLowerCase() : '';
@@ -164,7 +173,6 @@
     });
   }
   filter();
-  select.addEventListener('change', filter);
   if (stateSelect) stateSelect.addEventListener('change', filter);
   if (sortSelect) sortSelect.addEventListener('change', filter);
   if (search) {

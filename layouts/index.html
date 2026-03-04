@@ -10,18 +10,19 @@
 </div>
 
 {{ $whatsapp := .Site.Params.whatsapp_number }}
+{{ $featured := slice "Ditto" "Magikarp" "Cubone" "Togepi" }}
 {{ $scratch := newScratch }}
 {{ range site.Data.pokemon }}
-  {{ if or (eq .image true) (eq .available true) }}
-    {{ $scratch.Add "done" (slice .) }}
+  {{ if in $featured .name }}
+    {{ $scratch.Add "picks" (slice .) }}
   {{ end }}
 {{ end }}
-{{ $done := $scratch.Get "done" }}
-{{ if $done }}
+{{ $picks := $scratch.Get "picks" }}
+{{ if $picks }}
 <section class="container featured-section">
   <h2 class="featured-title">Já feitos</h2>
   <div class="pokemon-grid">
-    {{ range first 4 (shuffle $done) }}
+    {{ range $picks }}
       {{ $id := int .id }}
       {{ $hasImage := eq .image true }}
       {{ $isAvailable := eq .available true }}
